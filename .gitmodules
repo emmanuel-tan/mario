@@ -1,3 +1,7 @@
 [submodule "bwa-mem2"]
-	path = bwa-mem2
+	path = external/bwa-mem2
 	url = git@github.com:emmanuel-tan/bwa-mem2.git
+
+[submodule "ext/safestringlib"]
+	path = external/bwa-mem2/ext/safestringlib
+	url = https://github.com/intel/safestringlib.git
