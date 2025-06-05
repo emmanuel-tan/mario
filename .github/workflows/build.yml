@@ -55,7 +55,7 @@ jobs:
       - name: Make test script and binary executable
         run: |
           chmod +x tests/bwa_smoke_test.sh
-          chmod +x ./bwa-mem2-bin
+          chmod +x ./bwa-mem2-bin/bwa-mem2
 
       - name: Run smoke test
         run: bash tests/bwa_smoke_test.sh
