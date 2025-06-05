@@ -66,8 +66,19 @@ jobs:
           name: bwa-mem2-test-results.sam
           path: ./tests/out.sam
 
+  validate-output:
+    needs: smoke-test
+    runs-on: ubuntu-latest 
+
+    steps: 
       - name: Install samtools
         run: sudo apt-get update && sudo apt-get install -y samtools
+
+      - name: Download smoke-test output
+        uses: actions/download-artifact@v4
+        with:
+          name: bwa-mem2-test-results.sam
+          path: ./tests/out.sam
       
       - name: Sort results
         run: samtools sort -o ./tests/out_sorted.sam ./tests/out.sam
@@ -80,3 +91,8 @@ jobs:
         with: 
           name: bwa-mem2-test-results-sorted-headerless.sam
           path: ./tests/out_sorted_no_header.sam
+      
+      - name: Perform checksum
+        run: |
+          md5sum ./tests/out_sorted_no_header.sam
+          echo e7a0a885bdd09ac5260a2636d5e192ce9463f2b16bd39f0f5041e2f79e2aca2b
