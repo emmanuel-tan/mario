@@ -60,11 +60,25 @@ jobs:
       - name: Run smoke test
         run: bash tests/bwa_smoke_test.sh
 
-      - name: Upload smoke test result
+      - name: Upload sam file output
         uses: actions/upload-artifact@v4
         with: 
           name: bwa-mem2-test-results.sam
-          path: tests/
+          path: ./tests/out.sam
+
+      - name: Install samtools
+        run: sudo apt-get update && sudo apt-get install -y samtools
+      
+      - name: Sort results
+        run: samtools sort -o ./tests/out_sorted.sam ./tests/out.sam
+
+      - name: Upload sorted bam file output
+        uses: actions/upload-artifact@v4
+        with: 
+          name: bwa-mem2-test-results-sorted.bam
+          path: ./tests/out_sorted.sam
+
+      
 
 
 
