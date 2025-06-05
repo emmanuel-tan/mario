@@ -5,3 +5,7 @@
 [submodule "ext/safestringlib"]
 	path = external/bwa-mem2/ext/safestringlib
 	url = https://github.com/intel/safestringlib.git
+
+[submodule "samtools"]
+	path = external/samtools
+	url = https://github.com/emmanuel-tan/samtools/tree/master
