@@ -27,11 +27,11 @@ jobs:
           cd external/bwa-mem2
           make
         
-      - name: Upload bwa-mem2 binary
+      - name: Upload bwa-mem2 binaries
         uses: actions/upload-artifact@v4
         with:
           name: bwa-mem2-bin
-          path: external/bwa-mem2/bwa-mem2
+          path: external/bwa-mem2/
   
   smoke-test:
     needs: build 
@@ -52,7 +52,7 @@ jobs:
       - name: Make test script and binary executable
         run: |
           chmod +x tests/bwa_smoke_test.sh
-          chmod +x ./bwa-mem2-bin/bwa-mem2
+          chmod +x ./bwa-mem2-bin/
 
       - name: Run smoke test
         run: bash tests/bwa_smoke_test.sh
