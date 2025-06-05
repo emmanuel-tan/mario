@@ -78,7 +78,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: bwa-mem2-test-results.sam
-          path: ./tests/out.sam
+          path: ./tests
       
       - name: Sort results
         run: samtools sort -o ./tests/out_sorted.sam ./tests/out.sam
