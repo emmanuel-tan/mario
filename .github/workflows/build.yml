@@ -73,16 +73,10 @@ jobs:
         run: samtools sort -o ./tests/out_sorted.sam ./tests/out.sam
         
       - name: Remove header
-        run: grep -v '^@' .tests/out_sorted.sam > .tests/out_sorted_no_header.sam
+        run: grep -v '^@' ./tests/out_sorted.sam > ./tests/out_sorted_no_header.sam
 
       - name: Upload sorted headerless sam file output
         uses: actions/upload-artifact@v4
         with: 
           name: bwa-mem2-test-results-sorted-headerless.sam
           path: .tests/out_sorted_no_header.sam
-
-
-
-
-    
-
