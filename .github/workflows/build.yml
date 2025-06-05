@@ -79,4 +79,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with: 
           name: bwa-mem2-test-results-sorted-headerless.sam
-          path: .tests/out_sorted_no_header.sam
+          path: ./tests/out_sorted_no_header.sam
