@@ -10,19 +10,59 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest  
-
+    
     steps:
       - name: Checkout repository (with submodules)
         uses: actions/checkout@v4
         with: 
           submodules: recursive
-
+        
       - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential
-
+        
       - name: Build bwa-mem2
         run: |
           cd external/bwa-mem2
           make
+        
+      - name: Upload bwa-mem2 binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: bwa-mem2-bin
+          path: external/bwa-mem2/bwa-mem2
+  
+  smoke-test:
+    needs: build 
+    runs-on: ubuntu-latest 
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with: 
+          submodules: recursive
+
+      - name: Download bwa-mem2 binary
+        uses: actions/download-artifact@v4
+        with:
+          name: bwa-mem2-bin
+          path: ./bwa-mem2-bin
+      
+      - name: Make test script executable
+        run: chmod +x tests/bwa_smoke_test.sh
+
+      - name: Run smoke test
+        run: bash tests/bwa_smoke_test.sh
+
+      - name: Upload smoke test result
+        uses: actions/upload-artifact@v4
+        with: 
+          name: bwa-mem2-test-results.sam
+          path: tests/
+
+
+
+
+    
+
