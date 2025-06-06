@@ -97,7 +97,7 @@ jobs:
           sha256sum ./tests/out_sorted_no_header.sam
           echo e7a0a885bdd09ac5260a2636d5e192ce9463f2b16bd39f0f5041e2f79e2aca2b
 
-  dockerize:
+  containerize:
     needs: validate-output
     runs-on: ubuntu-latest
     if: success() 
@@ -130,4 +130,9 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/bwa-mem2:latest
             ${{ secrets.DOCKER_USERNAME }}/bwa-mem2:${{ github.sha }}
 
+      - name: Container smoke test
+        run: |
+          echo "Verifying container starts and binary works..."
+          docker run --rm your-username/bwa-mem2:${{ github.sha }} --help
+          echo "Container verification complete"
     
