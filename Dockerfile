@@ -6,12 +6,9 @@ RUN apt-get update && apt-get install -y \
     libstdc++6 \
     && rm -rf /var/lib/apt/lists/*
 
-COPY external/bwa-mem2/bwa-mem2* /usr/local/bin/
+COPY external/bwa-mem2/bwa-mem2* /usr/local/bin/ 
 RUN chmod +x /usr/local/bin/bwa-mem2*
 
 WORKDIR  /data
 
 ENTRYPOINT ["bwa-mem2"]
-
-# Example default arguments (can be overridden at runtime)
-CMD ["version"]
