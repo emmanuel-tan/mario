@@ -134,6 +134,6 @@ jobs:
       - name: Container smoke test
         run: |
           echo "Verifying container starts and binary works..."
-          docker run --rm ${{ secrets.DOCKER_USERNAME }}/bwa-mem2:${{ github.sha }} --help
+          docker run --rm ${{ secrets.DOCKER_USERNAME }}/bwa-mem2:${{ github.sha }} version
           echo "Container verification complete"
     
