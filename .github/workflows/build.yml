@@ -127,7 +127,7 @@ jobs:
           context: .
           push: true
           tags: |
-            ${{ secrets.DOCKER_USERNAME }} /bwa-mem2:latest
-            ${{ secrets.DOCKER_USERNAME }} /bwa-mem2:${{ github.sha }}
+            ${{ secrets.DOCKER_USERNAME }}/bwa-mem2:latest
+            ${{ secrets.DOCKER_USERNAME }}/bwa-mem2:${{ github.sha }}
 
     

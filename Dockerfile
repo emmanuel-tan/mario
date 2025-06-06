@@ -1,14 +1,6 @@
 FROM ubuntu:22.04
 
 RUN apt-get update && apt-get install -y \
-    build-essential \
-    git \
-    cmake \
-    zlib1g-dev \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install runtime dependencies
-RUN apt-get update && apt-get install -y \
     libc6 \
     libgcc-s1 \
     libstdc++6 \
