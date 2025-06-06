@@ -94,5 +94,5 @@ jobs:
       
       - name: Perform checksum
         run: |
-          md5sum ./tests/out_sorted_no_header.sam
+          sha256sum ./tests/out_sorted_no_header.sam
           echo e7a0a885bdd09ac5260a2636d5e192ce9463f2b16bd39f0f5041e2f79e2aca2b
