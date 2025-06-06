@@ -129,6 +129,7 @@ jobs:
           tags: |
             ${{ secrets.DOCKER_USERNAME }}/bwa-mem2:latest
             ${{ secrets.DOCKER_USERNAME }}/bwa-mem2:${{ github.sha }}
+          platforms: linux/amd64
 
       - name: Container smoke test
         run: |
