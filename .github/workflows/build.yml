@@ -151,6 +151,4 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
               docker pull ${{ secrets.DOCKER_USERNAME }}/bwa-mem2:${{ github.sha }}
-              docker stop bwa-mem2 || true
-              docker rm bwa-mem2 || true
-              docker run --rm --name bwa-mem2 ${{ secrets.DOCKER_USERNAME }}/bwa-mem2:${{ github.sha }} version
+              docker run --rm ${{ secrets.DOCKER_USERNAME }}/bwa-mem2:${{ github.sha }} version
