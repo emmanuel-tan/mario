@@ -134,6 +134,23 @@ jobs:
       - name: Container smoke test
         run: |
           echo "Verifying container starts and binary works..."
+          echo "BWA-MEM2 version: "
           docker run --rm ${{ secrets.DOCKER_USERNAME }}/bwa-mem2:${{ github.sha }} version
-          echo "Container verification complete"
-    
+
+  deploy:
+    needs: containerize
+    runs-on: ubuntu-latest
+    if: success()
+
+    steps: 
+      - name: SSH into EC2
+        uses: appleboy/ssh-action@v1
+        with: 
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+              docker pull ${{ secrets.DOCKER_USERNAME }}/bwa-mem2:${{ github.sha }}
+              docker stop bwa-mem2 || true
+              docker rm bwa-mem2 || true
+              docker run --rm --name bwa-mem2 ${{ secrets.DOCKER_USERNAME }}/bwa-mem2:${{ github.sha }} version
