@@ -26,6 +26,12 @@ jobs:
         run: |
           cd external/bwa-mem2
           make
+      
+      - name: Add bwa-mem2 to PATH
+        run: |
+          echo "$GITHUB_WORKSPACE/external/bwa-mem2" >> $GITHUB_PATH
+          ls -lh $GITHUB_WORKSPACE/external/bwa-mem2
+          which bwa-mem2 || echo "bwa-mem2 not in PATH yet"
         
       - name: Upload bwa-mem2 binaries
         uses: actions/upload-artifact@v4
@@ -143,7 +149,7 @@ jobs:
     if: success()
 
     steps: 
-      - name: SSH into EC2
+      - name: SSH into EC2 and pull Docker image
         uses: appleboy/ssh-action@v1
         with: 
           host: ${{ secrets.EC2_HOST }}
