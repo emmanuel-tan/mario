@@ -7,10 +7,10 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 COPY external/bwa-mem2/bwa-mem2* /usr/local/bin/ 
-COPY tests/ tests/ 
-COPY data data/
+COPY tests/ /app/tests/ 
+COPY data /app/data/
 RUN chmod +x /usr/local/bin/bwa-mem2* tests/
 
-WORKDIR  /data
+WORKDIR  /app
 
 ENTRYPOINT ["bwa-mem2"]
