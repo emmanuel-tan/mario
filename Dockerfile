@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install -y \
 COPY external/bwa-mem2/bwa-mem2* /usr/local/bin/ 
 COPY tests/ tests/ 
 COPY data data/
-RUN chmod +x /usr/local/bin/bwa-mem2* RUN chmod +x tests/
+RUN chmod +x /usr/local/bin/bwa-mem2* tests/
 
 WORKDIR  /data
 
