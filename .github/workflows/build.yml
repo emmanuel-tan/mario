@@ -29,7 +29,7 @@ jobs:
       
       - name: Add bwa-mem2 to PATH and verify
         run: |
-          echo "$GITHUB_WORKSPACE/external/bwa-mem2" >> $GITHUB_PATH
+          echo "${{ GITHUB_WORKSPACE }}/external/bwa-mem2" >> ${{ GITHUB_PATH }}
           which bwa-mem2
           bwa-mem2 version
         
