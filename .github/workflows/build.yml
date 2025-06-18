@@ -27,10 +27,10 @@ jobs:
           cd external/bwa-mem2
           make
       
-      - name: Debug - Check what was built
-        run: |
-          ls -la external/bwa-mem2/
-          find external/bwa-mem2/ -name "*bwa*" -type f
+      # - name: Debug - Check what was built
+      #   run: |
+      #     ls -la external/bwa-mem2/
+      #     find external/bwa-mem2/ -name "*bwa*" -type f
           
       - name: Add BWA-MEM2 to PATH
         run: echo "${{ github.workspace }}/external/bwa-mem2" >> $GITHUB_PATH
@@ -41,13 +41,7 @@ jobs:
           ls -la external/bwa-mem2/
           which bwa-mem2 || echo "bwa-mem2 not found in PATH"
           ./external/bwa-mem2/bwa-mem2 version || echo "Direct execution failed"
-      
-      # - name: Add bwa-mem2 to PATH and verify
-      #   run: |
-      #     echo "${{ github.workspace }}/external/bwa-mem2" >> $GITHUB_PATH
-      #     which bwa-mem2
-      #     bwa-mem2 version
-        
+       
       - name: Upload bwa-mem2 binaries
         uses: actions/upload-artifact@v4
         with:
@@ -70,10 +64,11 @@ jobs:
           name: bwa-mem2-bin
           path: ./bwa-mem2-bin
       
-      - name: Make test script and binary executable
+      - name: Add to path, and make test script and binary executable
         run: |
           chmod +x tests/bwa_smoke_test.sh
           chmod +x ./bwa-mem2-bin/bwa-mem2*
+          echo "$PWD/bwa-mem2-bin" >> $GITHUB_PATH
       
       - name: Print paths of downloaded files for debugging
         run: ls -lh ./bwa-mem2-bin
