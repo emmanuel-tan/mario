@@ -2,9 +2,9 @@ name: CI & CD Pipeline
 
 on:
   push:
+    paths: external/bwa-mem2/**
+  pull_request:
     branches: [ main ]
-  # pull_request:
-  #   branches: [ main ]
   workflow_dispatch:
 
 jobs:
